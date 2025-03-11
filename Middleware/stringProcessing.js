@@ -1,4 +1,4 @@
-
+//process text to input into wolfram alpha API query
 function processTextInput(req, res, next) {
     let {input} = req.query;
     if (input && typeof input === 'string') {

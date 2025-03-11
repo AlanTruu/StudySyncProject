@@ -1,3 +1,7 @@
+html {
+    font-size : 16px;
+}
+
 body{
     justify-content: start;
     display: flex;
@@ -45,4 +49,28 @@ body{
     background-color: orange;
     flex-basis: 60%;
     height: 30%;
+}
+
+#tamagotchi {
+    position : relative;
+    top : 65vh;
+    left : 3vw;
+    box-sizing : content-box;
+    height : 20vh;
+    width : 10vw;
+    font-size : 1rem;
+    box-sizing : content-box;
+    overflow-y: auto;
+}
+
+#paperClip {
+    margin-top : 3%;
+    margin-left : 3%;
+    margin-bottom : 3%;
+    height : 5vh;
+    width : 5vw;
+}
+
+#input {
+    margin-left : 3%;
 }
