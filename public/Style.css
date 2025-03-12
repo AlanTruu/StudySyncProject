@@ -21,37 +21,48 @@ body{
     font-size: 40pt;
 }
 
+/* Header Styling */
 .con-1{
     background-color: red;
     flex-basis: 100%;
     height: 10%;
+    align-content: center;
 }
 
+#sign-upButton1{
+    margin: 0;
+    margin-right: 5%;
+    display: flex;
+    justify-content: end;
+    
+}
+
+#sign-upButton2{
+    width: 10%;
+}
+
+/* Timer Styling */
 .con-2{
     background-color: green;
     flex-basis: 40%;
     height: 60%;
 }
 
+/* Calendar Styling */
 .con-3{
     background-color: blue;
     flex-basis: 60%;
     height: 60%;
 }
 
+/* Tamagotchi Styling */
 .con-4{
     background-color: yellow;
     flex-basis: 40%;
     height: 30%;
 }
 
-.con-5{
-    background-color: orange;
-    flex-basis: 60%;
-    height: 30%;
-}
-
-#tamagotchi {
+/* #tamagotchi {
     position : relative;
     top : 65vh;
     left : 3vw;
@@ -61,7 +72,7 @@ body{
     font-size : 1rem;
     box-sizing : content-box;
     overflow-y: auto;
-}
+} */
 
 #paperClip {
     margin-top : 3%;
@@ -74,3 +85,34 @@ body{
 #input {
     margin-left : 3%;
 }
+
+/* Heatmap Styling */
+.con-5{
+    background-color: orange;
+    flex-basis: 60%;
+    height: 30%;
+}
+
+#heatmapContainer {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 0%;
+}
+
+#heatmapContent {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0%;
+}
+
+.heatmapItem {
+    width: 2.5vw;
+    height: 2.5vw;
+    margin: 1%;
+    background-color: white;
+    font-size: 1rem;
+    display: flex;
+}
+

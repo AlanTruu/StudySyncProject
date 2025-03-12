@@ -1,4 +1,4 @@
-
+// **** Tamagotchi Bot Functions ****
 //handling text input
 const input = document.querySelector('#testingInput');
 function getTextInput() {
@@ -32,3 +32,10 @@ const sendInput = async () => {
 
 const inputButton = document.querySelector('#inputButton');
 inputButton.addEventListener('click', sendInput);
+
+// **** Heatmap Functions ****
+// Check date and time
+setInterval(() => {
+    const now = new Date();
+}, 1000);
+
