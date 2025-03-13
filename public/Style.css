@@ -8,6 +8,8 @@ body{
     flex-wrap: wrap;
     align-content: start;
     margin: 0%;
+    font-family: 'Roboto Mono', serif;
+    background-color: #4b7589;
 }
 
 p{
@@ -22,13 +24,12 @@ p{
 
 .container{
     margin: 0%;
-    background-color: aqua;
+    border-bottom: 1px solid black;
     font-size: 40pt;
 }
 
 /* Header Styling */
 .con-1{
-    background-color: red;
     flex-basis: 100%;
     height: 10%;
     align-content: center;
@@ -48,10 +49,9 @@ p{
 
 /* Timer Styling */
 .con-2{
-    background-color: green;
     flex-basis: 40%;
     height: 60%;
-
+    border-right: 1px solid black;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -112,16 +112,15 @@ p{
 
 /* Calendar Styling */
 .con-3{
-    background-color: blue;
-    flex-basis: 60%;
+    flex-grow: 1;
     height: 60%;
 }
 
 /* Tamagotchi Styling */
 .con-4{
-    background-color: yellow;
     flex-basis: 40%;
     height: 30%;
+    border-right: 1px solid black;
 }
 
 /* #tamagotchi {
@@ -150,29 +149,34 @@ p{
 
 /* Heatmap Styling */
 .con-5{
-    background-color: orange;
-    flex-basis: 60%;
+    flex-basis: 59%;
     height: 30%;
 }
 
 #heatmapContainer {
-    display: flex;
+    display: flex;  
     width: 100%;
-    flex-wrap: wrap;
     margin: 0%;
+}
+
+#heatmapTitle{
+    margin: 3%;
+    font-size: 1.5rem;
 }
 
 #heatmapContent {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin: 0%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .heatmapItem {
-    width: 2.5vw;
-    height: 2.5vw;
-    margin: 1%;
+    width: 2vw;
+    height: 2vw;
+    margin: .5%;
+    border: 1px solid black;
     background-color: white;
     font-size: 1rem;
     display: flex;

@@ -21,7 +21,7 @@ app.get('/query', chatRequest);
 app.get('/', sendSignUpPage);
 
 //main page that users will see once logged in
-app.use('/main', express.static('./public'));
+app.use('/main', express.static(path.resolve(__dirname, './public')));
 app.get('/main', main);
 
 //sign up page, will redirect user to main once they login
