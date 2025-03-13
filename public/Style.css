@@ -10,6 +10,11 @@ body{
     margin: 0%;
 }
 
+p{
+    margin: 0;
+    padding: 0;
+}
+
 .break{
     flex-basis: 100%;
     height: 0px;
@@ -46,6 +51,63 @@ body{
     background-color: green;
     flex-basis: 40%;
     height: 60%;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+#study{
+    grid-area: 1 / 1 / 1 / 1;
+}
+
+#short_break{
+    grid-area: 1 / 3 / 1 / 3;
+}
+
+.timer_display{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    gap: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.label{
+    align-self: center;
+    justify-self: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#study_timer{
+    grid-area: 2 / 1 / 2 / 1;
+}
+
+#break_timer{
+    grid-area: 2 / 3 / 2 / 3;
+}
+
+.buttons{
+    align-self: center;
+    justify-self: center;
+
+    width: 50px;
+    height: 30px;
+    font-size: 12px;
+}
+
+#start{
+    grid-area: 3 / 1 / 3 / 1;
+}
+
+#pause{
+    grid-area: 3 / 2 / 3 / 3;
+}
+
+#reset{
+    grid-area: 3 / 3 / 3 / 3;
 }
 
 /* Calendar Styling */

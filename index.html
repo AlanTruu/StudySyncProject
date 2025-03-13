@@ -16,7 +16,23 @@
 <div class="break"></div>
 
 <!-- Timer -->
-<div class="container con-2" id="timer">2</div>
+<div class="container con-2" id="timer">
+    <p id="study" class="label">Study:</p><p id="short_break" class="label">Short-Break:</p>
+    <!--Study Timer-->
+    <div id="study_timer" class="timer_display">
+        <p id="s_minutes">25</p><p class="semicolon">:</p><p id="s_seconds">00</p>
+    </div>
+
+    <!--Short Break Timer-->
+    <div id="break_timer" class="timer_display">
+        <p id="b_minutes">05</p><p class="semicolon">:</p><p id="b_seconds">00</p>
+    </div>
+
+    <!--Buttons-->
+    <button id="start" class="buttons">Start</button>
+    <button id="pause" class="buttons">Pause</button>
+    <button id="reset" class="buttons">Reset</button>
+</div>
 
 <!-- Calendar -->
 <div class="container con-3" id="calendar">3</div>
@@ -79,5 +95,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src = 'public/MainPageFunctions.js'></script>
+<script src="timer.js"></script>
 
 </body>
