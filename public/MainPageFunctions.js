@@ -26,7 +26,8 @@ const sendInput = async () => {
         outputDiv.appendChild(newTextNode);
     }
     catch (err) {
-        console.log(err);
+        console.error(err);
+        window.alert('Request failed', err);
     }
 };
 
