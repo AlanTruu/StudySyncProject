@@ -1,7 +1,7 @@
-const {queryWolfram} = require('../API_functions');
+import {queryWolfram} from '../API_functions.js';
 
 
-const chatRequest = async (req,res) => {
+const chatRequest = async (req, res, next) => {
     //get processed string from req, pass to queryWolfram function to get data
     const input = req.input;
     if (input) {
@@ -15,9 +15,9 @@ const chatRequest = async (req,res) => {
             return res.json({result : answer.data.result});
         }
         catch (err) {
-            console.log(err);
+            return next(err);
         }
     }
 }
 
-module.exports = {chatRequest};
+export {chatRequest};

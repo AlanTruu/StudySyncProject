@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const queryWolfram = async (queryInput) => {
     try {
@@ -10,4 +10,4 @@ const queryWolfram = async (queryInput) => {
     }
 };
 
-module.exports = {queryWolfram};
+export {queryWolfram};

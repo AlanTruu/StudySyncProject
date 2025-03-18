@@ -13,6 +13,8 @@ import mysql from 'mysql2/promise';
     }
 
 //async function that queries the DB to check if email is already in use
+//function expects a string email
+//returns true if email is already in use, false otherwise
 async function checkIfEmailExists(email) {
     const [results, fields] = await connection.execute('SELECT COUNT(*) AS num FROM userdetails WHERE email = ?', [email]);
     if (results[0].num == 1) {
@@ -25,43 +27,49 @@ async function checkIfEmailExists(email) {
     
 
 //signNewUser should return true if sign-up was successful, false otherwise
+//function requires email, username, plain text password, will return false if email is in use already, true if sign up
+//was successful
+//things that can go wrong: checkIfEmailExists fails, bcrypt.hash fails
+//TO DO: what should happen when these things go wrong?
 async function signNewUser([email, username, plainTextPassword]) {
     //check if email already exits in DB
-    const checkEmail = await checkIfEmailExists(email);
-
-    if (checkEmail) {
-        return false;
-    }
     try {
+        const checkEmail = await checkIfEmailExists(email);
+        
+        if (checkEmail) {
+            return false;
+        }
+        
         //if email is new, execute INSERT statement into DB with email, user, hashedPass, must call bcrypt here
-        let hashedPassword = await bcrypt.hash('plainTextPassword', 12);
+        let hashedPassword = await bcrypt.hash(plainTextPassword, 12);
         const [results, fields] = await connection.execute('INSERT INTO userDetails(email, username, passHash) VALUES (?, ?, ?)', [email, username, hashedPassword]);
-        console.log(results);
         return true;
     }
     catch(error) {
+        throw error;
+    }
+    
+    
+}
+
+//function expects an array with two strings, email and plaintext
+//things that can go wrong: query to DB fails, bcrypt.compare fails
+//TO DO: what should the user expect when they fail to login?
+async function login([email, plainTextPassword]) {
+    try {
+        const [results, fields] = await connection.execute('SELECT passHash FROM userdetails WHERE email = ?', [email]);
+        if (results[0]) {
+            return await bcrypt.compare(plainTextPassword, results[0].passHash);
+        }
+        else {
+            console.log('Error at database.mjs: no rows were pulled from DB or similar error');
+            return false;
+        }
+    }
+    catch (error) {
         console.error(error);
     }
     
-    
-}
+};
 
-
-
-// login function
-// How do I compare?
-// What's the query going to be?
-// I want to search the database for the specified username
-// hash the inputted password
-// if username exists on database, check to see if the inputted password is the same as what's on the DB
-// async function with array that has user and hashed input password
-
-async function loginUser([email, plainTextPassword]) {
-    const [results, fields] = await connection.execute('SELECT email, passHash FROM userdetails WHERE email = ?', [email]);
-    if (results[0] == 1) {
-
-    }
-    
-}
-
-export {signNewUser};
+export {signNewUser, login};

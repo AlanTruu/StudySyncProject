@@ -1,11 +1,13 @@
-const express = require('express');
-const {queryWolfram} = require('./API_functions');
-const {chatRequest} = require('./Controllers/chatController');
-const {main} = require('./Controllers/mainController');
-const {signUp, sendSignUpPage} = require('./Controllers/signUpController');
-const {processTextInput} = require('./Middleware/stringProcessing')
-const path = require('path');
-const axios = require('axios');
+import express from 'express';
+import {queryWolfram} from './API_functions.js';
+import {chatRequest} from './Controllers/chatController.js';
+import {main} from './Controllers/mainController.js';
+import {signUp, sendSignUpPage, sendLoginPage, loginUser} from './Controllers/signUpController.js';
+import {processTextInput} from './Middleware/stringProcessing.js';
+import {errorHandler} from './Middleware/errorHandler.js';
+import * as path from 'path';
+import axios from 'axios';
+
 const app = express();
 
 //middleware to parse any JSON and process text input, process form input
@@ -19,12 +21,16 @@ app.get('/query', chatRequest);
 
 //sign up page
 app.get('/', sendSignUpPage);
+app.get('/login', sendLoginPage);
 
 //main page that users will see once logged in
-app.use('/main', express.static(path.resolve(__dirname, './public')));
+app.use('/main', express.static('./public'));
 app.get('/main', main);
 
-//sign up page, will redirect user to main once they login
-app.post('/signup', signUp)
+//post requests for signup/login form actions
+app.post('/signup', signUp);
+app.post('/login', loginUser);
 
+app.use(errorHandler);
+//TO DO: look into wrapping async controllers in middleware rather than using try/catch constantly in async funcs
 app.listen(5000);
