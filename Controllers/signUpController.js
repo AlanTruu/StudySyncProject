@@ -8,7 +8,8 @@ import {EmailError} from '../customErrors.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { signNewUser, login} from '../database.mjs';
-
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //sends the user a sign up page
@@ -54,10 +55,17 @@ const sendLoginPage = (req, res) => {
 const loginUser = async (req, res, next) => {
     const email = req.body.Femail;
     const plainTextPass = req.body.Fpassword;
+    
+    
     if (email && plainTextPass) {
         try {
             const loginSuccessful = await login([email, plainTextPass]);
             if (loginSuccessful) {
+                // const user = {name : req.body.Femail};
+                // const accessToken = await jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {expiresIn : '1h'}, function(err, token) {
+                //     res.cookie('token', accessToken, {path : '/main', httpOnly : true, signed : true});
+                // });
+                
                 res.redirect('/main');
             }
             else {
