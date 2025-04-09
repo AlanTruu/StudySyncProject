@@ -61,12 +61,13 @@ const loginUser = async (req, res, next) => {
         try {
             const loginSuccessful = await login([email, plainTextPass]);
             if (loginSuccessful) {
-                // const user = {name : req.body.Femail};
-                // const accessToken = await jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {expiresIn : '1h'}, function(err, token) {
-                //     res.cookie('token', accessToken, {path : '/main', httpOnly : true, signed : true});
-                // });
+                const user = {name : req.body.Femail};
+                const accessToken = await jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {expiresIn : '1h'}, function(err, token) {
+                    res.cookie('token', accessToken, {path : '/main', httpOnly : true});
+                    return res.redirect('/main');
+                });
                 
-                res.redirect('/main');
+                //res.redirect('/main');
             }
             else {
                 //Here, what to do when login is not succesful?

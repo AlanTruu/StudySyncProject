@@ -123,17 +123,9 @@ p{
     border-right: 1px solid black;
 }
 
-/* #tamagotchi {
-    position : relative;
-    top : 65vh;
-    left : 3vw;
-    box-sizing : content-box;
-    height : 20vh;
-    width : 10vw;
+#tamagotchi {
     font-size : 1rem;
-    box-sizing : content-box;
-    overflow-y: auto;
-} */
+}
 
 #paperClip {
     margin-top : 3%;

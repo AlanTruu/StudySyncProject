@@ -18,6 +18,7 @@ app.use(express.json());
 app.use('/query', processTextInput);
 app.use(express.urlencoded({extended : false}));
 app.use('/main', cookieParser());
+app.use('/main', auth);
 
 //GET request to obtain answer from wolfram alpha API
 app.get('/query', chatRequest);

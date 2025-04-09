@@ -2,25 +2,24 @@ import jwt from 'jsonwebtoken';
 import {TokenError} from '../customErrors.js';
 import 'dotenv/config';
 
+//Simple authentication middleware, after cookie parser parses the cookies which are in json format
+//get token, use jwt.verify to compare 
+//if decoded, should send the user data to next middleware
 const auth = async (req, res, next) => {
     try {
         const token = req.cookies.token;
         if (token) {
-            const token = jwt.verify(token, process.env.SECRET_ACCESS_TOKEN);
-            if (access) {
+            await jwt.verify(token, process.env.SECRET_ACCESS_TOKEN, function(err, decoded) {
                 next();
-            }
-            else {
-                throw new TokenError('Token could not be validated', 401);
-            }
+            });
         }
         else {
-            throw new TokenError('No token found', 401);
+            throw new TokenError('user could not be verified', 401);
         }
+        
     }
     catch (err) {
-        next(err);
-        
+        return next(err);
     }
 }
 
