@@ -30,7 +30,7 @@ const signUp = async (req, res, next) => {
         if (email && username && plainTextPass) {
             const signSuccessful = await signNewUser([email, username, plainTextPass]);
             if (signSuccessful) {
-                res.redirect('/main');
+                return res.redirect('/main');
             }
             else if (!signSuccessful) {
                 throw new EmailError('email in use baka', 401);

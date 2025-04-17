@@ -1,0 +1,34 @@
+html {
+    box-sizing: border-box;
+    background-color: rgb(4, 55, 242);
+}
+
+#main-div {
+    width : 90vw;
+    position : relative;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+}
+#userEmail, #user, #pass {
+    border-radius: 6px;
+}
+#form-div {
+    position : absolute;
+    margin-left: 100px;
+    margin-top : 40px;
+}
+
+#submit-button {
+    background-color: orange;
+}
+
+@media (min-width : 576px) {
+    #main-div {
+        width : 20vw;
+        height : 50vh;
+        margin : 0 auto;
+        margin-top : 200px;
+        margin-left: 700px;
+    }
+}

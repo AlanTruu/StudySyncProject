@@ -1,13 +1,28 @@
-<h1>SIGN UP</h1>
-<form action = 'http://localhost:5000/signup' method = 'post'>
-    <label>email:</label> <br>
-    <input type = 'text' name = 'Femail' id = 'userEmail' required> <br>
-    <label>username:</label> <br>
-    <input type = 'text' name = 'Fusername' id = 'user' required> <br>
-    <label> password:</label> <br>
-    <input type = 'text' name = 'Fpassword'id = 'pass' required> <br>
-    <input type = 'submit' value = 'submit'> 
-</form>
-
-<h2>Already have an account? Login</h2>
-<button></button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' href = 'signUpStyle.css'>
+    <title>Document</title>
+</head>
+<body>
+    
+<div id = 'main-div'>
+    <div id = 'form-div'>
+        <h1>SIGN UP</h1>
+        <form action = 'http://localhost:5000/signup' method = 'post' id = 'form'>
+            <label>email:</label> <br>
+            <input type = 'text' name = 'Femail' id = 'userEmail' required> <br>
+            <label>username:</label> <br>
+            <input type = 'text' name = 'Fusername' id = 'user' required> <br>
+            <label> password:</label> <br>
+            <input type = 'password' name = 'Fpassword'id = 'pass' required> <br>
+            <input type = 'submit' value = 'submit' id = 'submit-button'> 
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./public-signup/signUpFormIntercepter.js"></script>
+</body>
+</html>

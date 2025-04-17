@@ -2,10 +2,10 @@ import bcrypt from "bcryptjs";
 import mysql from 'mysql2/promise';
 
     const connection = await mysql.createConnection({
-        host : 'localhost',
-        user : 'root',
-        password: 'pleaseKillMe',
-        database : 'studysyn'
+        host : 'sql3.freesqldatabase.com',
+        user : 'sql3773696',
+        password: 'b9mSHp9u3P',
+        database : 'sql3773696'
     });
 
     if (connection) {
@@ -19,7 +19,7 @@ async function checkIfEmailExists(email) {
     const [results, fields] = await connection.execute('SELECT COUNT(*) AS num FROM userdetails WHERE email = ?', [email]);
     if (results[0].num == 1) {
         console.log('user already exists');
-        return true; //return true as username already exists on DB
+        return true; 
     }
     console.log('Result of COUNT(*) ' + results[0]);
     return false;
@@ -42,7 +42,7 @@ async function signNewUser([email, username, plainTextPassword]) {
         
         //if email is new, execute INSERT statement into DB with email, user, hashedPass, must call bcrypt here
         let hashedPassword = await bcrypt.hash(plainTextPassword, 12);
-        const [results, fields] = await connection.execute('INSERT INTO userDetails(email, username, passHash) VALUES (?, ?, ?)', [email, username, hashedPassword]);
+        const [results, fields] = await connection.execute('INSERT INTO userdetails(email, username, passHash) VALUES (?, ?, ?)', [email, username, hashedPassword]);
         return true;
     }
     catch(error) {

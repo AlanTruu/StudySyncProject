@@ -24,6 +24,7 @@ app.use('/main', auth);
 app.get('/query', chatRequest);
 
 //sign up page
+app.use('/' ,express.static('./public-signup'))
 app.get('/', sendSignUpPage);
 app.get('/login', sendLoginPage);
 
