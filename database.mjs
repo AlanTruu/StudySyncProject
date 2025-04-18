@@ -21,7 +21,7 @@ async function checkIfEmailExists(email) {
         console.log('user already exists');
         return true; 
     }
-    console.log('Result of COUNT(*) ' + results[0]);
+    console.log('Result of COUNT(*) ' + results[0].email);
     return false;
 }
     

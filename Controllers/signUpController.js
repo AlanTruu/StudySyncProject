@@ -17,23 +17,36 @@ const sendSignUpPage = (req, res) => {
     res.sendFile(path.resolve(__dirname, '../sign-up.html')
 )};
 
+const jwtSign = (res, email) => {
+    const user = {name : email};
+    jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {expiresIn : '1h'}, function(err, token) {
+        if (err) {
+            throw err;
+        }
+        
+        res.clearCookie('token', {path : '/main', httpOnly : true})
+        res.cookie('token', token, {path : '/main', httpOnly : true});
+        return res.redirect('/main');
+    });
+}
+
 //function that will process form data, and then redirect the user to main page if verified
 //function is called in sign up form, so it expects Femail, Fusername, Fpassword in the request body
 //TO DO: Since the fields are already required in the form, maybe validate the email's existence
 const signUp = async (req, res, next) => {
     try {
-        //check that the fields are filled
         const email = req.body.Femail;
         const username = req.body.Fusername;
         const plainTextPass = req.body.Fpassword;
         
         if (email && username && plainTextPass) {
             const signSuccessful = await signNewUser([email, username, plainTextPass]);
+            
             if (signSuccessful) {
-                return res.redirect('/main');
+                jwtSign(res, req.body.Femail);
             }
-            else if (!signSuccessful) {
-                throw new EmailError('email in use baka', 401);
+            else {
+                throw new EmailError('email in use', 401);
             }
         }
         else {
@@ -56,32 +69,20 @@ const loginUser = async (req, res, next) => {
     const email = req.body.Femail;
     const plainTextPass = req.body.Fpassword;
     
-    
     if (email && plainTextPass) {
         try {
             const loginSuccessful = await login([email, plainTextPass]);
+            
             if (loginSuccessful) {
-                const user = {name : req.body.Femail};
-                const accessToken = await jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {expiresIn : '1h'}, function(err, token) {
-                    res.cookie('token', accessToken, {path : '/main', httpOnly : true});
-                    return res.redirect('/main');
-                });
-                
-                //res.redirect('/main');
+                jwtSign(res, req.body.Femail);
             }
             else {
-                //Here, what to do when login is not succesful?
-                //probably should just reload page, but how?
                 res.send('Login attempt unsuccessful');
             }
         }
         catch (error){
             next(error);
         }
-    }
-    else {
-        console.log('signUpController.js 58 all fields not filled');
-        //do something here if fields are not filled
     }
 }
 

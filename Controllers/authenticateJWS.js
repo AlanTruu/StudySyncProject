@@ -9,12 +9,13 @@ const auth = async (req, res, next) => {
     try {
         const token = req.cookies.token;
         if (token) {
-            await jwt.verify(token, process.env.SECRET_ACCESS_TOKEN, function(err, decoded) {
+            jwt.verify(token, process.env.SECRET_ACCESS_TOKEN, function(err, decoded) {
+                console.log(decoded);
                 next();
             });
         }
         else {
-            throw new TokenError('user could not be verified', 401);
+            throw new TokenError('No token found', 401);
         }
         
     }
