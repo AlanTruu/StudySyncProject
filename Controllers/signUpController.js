@@ -26,7 +26,7 @@ const jwtSign = (res, email) => {
         
         res.clearCookie('token', {path : '/main', httpOnly : true})
         res.cookie('token', token, {path : '/main', httpOnly : true});
-        return res.redirect('/main');
+        return res.json({success : true, url : '/main'});
     });
 }
 
@@ -46,14 +46,10 @@ const signUp = async (req, res, next) => {
                 jwtSign(res, req.body.Femail);
             }
             else {
-                throw new EmailError('email in use', 401);
+                // res.json({success: false});
+                throw new EmailError('Email in use already!', 400);
             }
-        }
-        else {
-            //should probably reload the page here because not all fields were filled in 
-            console.log('field is missing');
-        }
-        
+        }  
     }
     catch (err) {
         return next(err)

@@ -1,11 +1,11 @@
 import bcrypt from "bcryptjs";
 import mysql from 'mysql2/promise';
-
+import 'dotenv/config';
     const connection = await mysql.createConnection({
-        host : 'sql3.freesqldatabase.com',
-        user : 'sql3773696',
-        password: 'b9mSHp9u3P',
-        database : 'sql3773696'
+        host : process.env.DB_host,
+        user : process.env.DB_user,
+        password: process.env.DB_password,
+        database : process.env.DB_database
     });
 
     if (connection) {
@@ -18,10 +18,10 @@ import mysql from 'mysql2/promise';
 async function checkIfEmailExists(email) {
     const [results, fields] = await connection.execute('SELECT COUNT(*) AS num FROM userdetails WHERE email = ?', [email]);
     if (results[0].num == 1) {
-        console.log('user already exists');
+        console.log('database.mjs 21: user already exists');
         return true; 
     }
-    console.log('Result of COUNT(*) ' + results[0].email);
+    // console.log('Result of COUNT(*) ' + results[0].email);
     return false;
 }
     

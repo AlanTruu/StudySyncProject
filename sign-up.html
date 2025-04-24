@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = 'stylesheet' href = 'signUpStyle.css'>
-    <title>Document</title>
+    <title>Study-Sync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
     
-<div id = 'main-div'>
+<main id = 'main-div'>
+    <h1>Sign up for Free!</h1>
     <div id = 'form-div'>
-        <h1>SIGN UP</h1>
-        <form action = 'http://localhost:5000/signup' method = 'post' id = 'form'>
-            <label>email:</label> <br>
-            <input type = 'text' name = 'Femail' id = 'userEmail' required> <br>
-            <label>username:</label> <br>
-            <input type = 'text' name = 'Fusername' id = 'user' required> <br>
-            <label> password:</label> <br>
-            <input type = 'password' name = 'Fpassword'id = 'pass' required> <br>
-            <input type = 'submit' value = 'submit' id = 'submit-button'> 
+        <form  id = 'form'>
+            <label for = 'email'>Email</label> <br>
+            <input type = 'text' name = 'Femail' autocomplete = 'email' placeholder = 'email' id = 'userEmail' required> <br>
+            <label for = 'username'>Username</label> <br>
+            <input type = 'text' name = 'Fusername' placeholder = 'username' id = 'user' required> <br>
+            <label for = 'password'> Password</label> <br>
+            <input type = 'password' name = 'Fpassword' placeholder = 'password' id = 'pass' required> <br>
+            <input type = 'submit' value = 'Sign up' id = 'submit-button'> 
         </form>
+        <p id ='EmailError'>Email!!!</p>
     </div>
-</div>
+</main>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./public-signup/signUpFormIntercepter.js"></script>
+<script src="signUpFormIntercepter.js"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ const auth = async (req, res, next) => {
             });
         }
         else {
-            throw new TokenError('No token found', 401);
+            throw new TokenError('No token found or jwt verification === false', 401);
         }
         
     }
