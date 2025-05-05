@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 html {
     font-size : 16px;
 }
@@ -12,11 +16,6 @@ body{
     background-color: #4b7589;
 }
 
-p{
-    margin: 0;
-    padding: 0;
-}
-
 .break{
     flex-basis: 100%;
     height: 0px;
@@ -25,7 +24,7 @@ p{
 .container{
     margin: 0%;
     border-bottom: 1px solid black;
-    font-size: 40pt;
+    font-size: 20pt;
 }
 
 /* Header Styling */
@@ -52,64 +51,133 @@ p{
     flex-basis: 40%;
     height: 60%;
     border-right: 1px solid black;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
 }
 
-#study{
-    grid-area: 1 / 1 / 1 / 1;
+.container-pomodoro {
+   
 }
 
-#short_break{
-    grid-area: 1 / 3 / 1 / 3;
+.pomodoro-timer {
+    display: inline-block;
+    padding: 0;
+    width: 600px;
+    box-sizing: border-box;
 }
 
-.timer_display{
+.main-pomodoro {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 20px auto;
+}
+
+.button-container {
+    margin-top: 20px;
     display: flex;
-    align-self: center;
-    justify-self: center;
-    gap: 5px;
-    font-size: 30px;
+    justify-content: center;
+}
+
+.p-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 2.5rem 0;
+    text-align: center;
+    border-radius: 50%;
+    background: #131e24;
+    color: #ffffffde;
+    box-shadow: 
+        20px 20px 42px rgba(14, 16, 33, 0.4), 
+        -20px -20px 42px rgba(28, 34, 68, 0.4);
+}
+
+.p-timer::before {
+    content: "";
+    position: absolute;
+    border: 10px solid #028fd2;
+    border-radius: 50%;
+    width: 20rem;
+    height: 20rem;
+}
+
+.time {
+    font-size: 5rem !important;
+    margin: 10px auto;
+}
+
+.button {
+    background-color: #4fc3f7;
+    color: #0e1a1f;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.button.active, .button:hover {
+    background-color: #4fc2f73a;
+}
+
+.hidden {
+    display: block;
+}
+
+.timer-display {
+    font-size: 5rem;
+    margin-top: 10px;
     font-weight: bold;
 }
 
-.label{
-    align-self: center;
-    justify-self: center;
-    font-size: 30px;
-    font-weight: bold;
+.buttons {
+    margin-top: 30px;
 }
 
-#study_timer{
-    grid-area: 2 / 1 / 2 / 1;
+#start, #stop, #reset {
+    background-color: #4fc3f7;
+    color: #0e1a1f;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all .2s ease-in;
 }
 
-#break_timer{
-    grid-area: 2 / 3 / 2 / 3;
+#start:hover {
+    background-color: green;
 }
 
-.buttons{
-    align-self: center;
-    justify-self: center;
-
-    width: 50px;
-    height: 30px;
-    font-size: 12px;
+#stop:hover {
+    background-color: red;
 }
 
-#start{
-    grid-area: 3 / 1 / 3 / 1;
+#reset:hover {
+    background-color: #607d8b;
 }
-
-#pause{
-    grid-area: 3 / 2 / 3 / 3;
+#timer-message {
+    color: white;
+    background-color: red;
+    display: none;
+    padding: 0;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 1rem;
 }
-
-#reset{
-    grid-area: 3 / 3 / 3 / 3;
-}
-
 /* Calendar Styling */
 .con-3{
     flex-grow: 1;
