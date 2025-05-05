@@ -257,35 +257,42 @@ h2 {
     grid-row: 3;
 }
 
-#heatmapContainer {
-    display: flex;  
+#heatmapGrid {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
     width: 100%;
-    margin: 0%;
+    height: 100%;
 }
 
-#heatmapTitle{
-    margin: 3%;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
+.square {
+    width: 1fr;
+    height: 1fr;
+    background: #5486d6;
+    border: 3px solid #19458a;
+  }
 
-#heatmapContent {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-left: 3%;
-    margin-right: 3%;
-}
+  .square:hover {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+  }
 
-.heatmapItem {
-    width: 2vw;
-    height: 2vw;
-    margin: .5%;
-    border: 1px solid black;
-    background-color: white;
-    font-size: 1rem;
-    display: flex;
-}
+  .square.active {
+    background: #e0cb7e;
+    border: 3px solid #a69147;
+  }
+
+  .square.active:hover {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+  }
+
+
+
+
+
 
 
 

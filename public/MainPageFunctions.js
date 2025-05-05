@@ -34,16 +34,7 @@ const sendInput = async () => {
 const inputButton = document.querySelector('#inputButton');
 inputButton.addEventListener('click', sendInput);
 
-// **** Heatmap Functions ****
-// Check date and time
-setInterval(() => {
-    const now = new Date();
-}, 1000);
-
-
-
-
-//calendar
+// **** Calendar ****
 document.addEventListener("DOMContentLoaded", function () {
     const calendarDiv = document.getElementById("calendar");
 
@@ -111,4 +102,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     calendarDiv.appendChild(grid);
+});
+
+// **** Heatmap ****
+const heatmapGrid = document.getElementById("heatmapGrid");
+const gridSize = 36; // Number of squares in the grid
+
+for (let i = 0; i < gridSize; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+    square.dataset.index = i; // Stores index for later use
+    heatmapGrid.appendChild(square);
+}
+
+document.addEventListener('DOMContentLoaded', () => { // Ensure DOM is loaded before runnning script
+    const grid = document.querySelector('.heatmapGrid');
+
+    // Generate array of squares attached to grid elements
+    grid.innerHTML = Array.from({ length: gridSize }).map((_, i) => '<div class="square" data-index="${i}"></div>').join('');
+
+    // Add event listeners to each square
+    grid.addEventListener('click', e => {
+        const sq = e.target;
+        if (!sq.classList.contains('square')) return; // Ignore clicks outside squares
+        sq.classList.toggle('active'); // Toggle active class
+    });
+
 });
