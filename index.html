@@ -4,6 +4,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <!--CDN Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 
@@ -20,21 +23,41 @@
 
 <!-- Timer -->
 <div class="container con-2" id="timer">
-    <p id="study" class="label">Study:</p><p id="short_break" class="label">Short-Break:</p>
-    <!--Study Timer-->
-    <div id="study_timer" class="timer_display">
-        <p id="s_minutes">25</p><p class="semicolon">:</p><p id="s_seconds">00</p>
-    </div>
+    <div class="notice" id="timer-message">Selet a timer before starting</div>
 
-    <!--Short Break Timer-->
-    <div id="break_timer" class="timer_display">
-        <p id="b_minutes">05</p><p class="semicolon">:</p><p id="b_seconds">00</p>
-    </div>
+    <div class="container-pomodoro">
+        <div class="pomodoro-timer">
+            <h2>Pomodoro Timer</h2>
 
-    <!--Buttons-->
-    <button id="start" class="buttons">Start</button>
-    <button id="pause" class="buttons">Pause</button>
-    <button id="reset" class="buttons">Reset</button>
+            <div class="button-container">
+                <button class="button" id="pomodoro-study"><i class="fa-solid fa-hourglass"></i> Study</button>
+                <button class="button" id="short-break">Short Break</button>
+                <button class="button" id="long-break">Long Break</button>
+            </div>
+
+            <div class="main-pomodoro">
+                <div class=p-timer>
+                    <div id="pomodoro-timers" class="timer-display" data-duration="25.00">
+                        <h2 class="time">25:00</h2>
+                    </div>
+
+                    <div id="short-timers" class="timer-display" data-duration="5.00">
+                        <h2 class="time">5:00</h2>
+                    </div>
+
+                    <div id="long-timers" class="timer-display" data-duration="10.00">
+                        <h2 class="time">10:00</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="start"><i class="fa-sharp fa-solid fa-play"></i></button>
+                <button id="stop"><i class="fa-solid fa-pause"></i></button>
+                <button id="reset"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Calendar -->
