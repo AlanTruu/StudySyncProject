@@ -1,70 +1,91 @@
-*{
+* {
     margin: 0;
     padding: 0;
-}
-html {
-    font-size : 16px;
-}
-
-body{
-    justify-content: start;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: auto; 
+  }
+  
+  body {
     display: flex;
-    flex-wrap: wrap;
-    align-content: start;
-    margin: 0%;
-    font-family: 'Roboto Mono', serif;
-    background-color: #4b7589;
+    flex-direction: column;
+    font-family: "Atkinson Hyperlegible Mono", sans-serif;
+  }
+
+/* Main grid for all apps */
+.dashboard {
+    background-color: #275291;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: .8fr 3fr 2fr;
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+    min-height: 100px;
+    height: 100vh;
+    width: 100vw;  
 }
 
-.break{
-    flex-basis: 100%;
-    height: 0px;
-}
-
-.container{
-    margin: 0%;
-    border-bottom: 1px solid black;
-    font-size: 20pt;
+/* Cards styling, applies to every app */
+.card {
+    background-color: #e0b372;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Header Styling */
 .con-1{
-    flex-basis: 100%;
-    height: 10%;
-    align-content: center;
+    display: flex;
+    grid-column: 1 / span 2;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo{
+    margin-left: 40px;
+    width: 260px;
+    height: 100px;
 }
 
 #sign-upButton1{
-    margin: 0;
-    margin-right: 5%;
-    display: flex;
-    justify-content: end;
-    
+    margin-right: 40px;
+
 }
 
 #sign-upButton2{
-    width: 10%;
+    min-width: 100px;
+    font-weight: bold;
 }
 
 /* Timer Styling */
 .con-2{
-    flex-basis: 40%;
-    height: 60%;
-    border-right: 1px solid black;
-    text-align: center;
-    width: 100%;
-    font-size: 20px;
-}
-
-.container-pomodoro {
-   
+    margin-left: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 .pomodoro-timer {
-    display: inline-block;
-    padding: 0;
-    width: 600px;
-    box-sizing: border-box;
+    
+    padding: 20px;
+    width: 500px;
+    
+}
+
+#timer-head{
+    text-align: center;
 }
 
 .main-pomodoro {
@@ -113,6 +134,12 @@ h2 {
     height: 20rem;
 }
 
+.timer_grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
 .time {
     font-size: 5rem !important;
     margin: 10px auto;
@@ -144,6 +171,9 @@ h2 {
 }
 
 .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 30px;
 }
 
@@ -180,15 +210,24 @@ h2 {
 }
 /* Calendar Styling */
 .con-3{
-    flex-grow: 1;
-    height: 60%;
+    margin-right: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 /* Tamagotchi Styling */
 .con-4{
-    flex-basis: 40%;
-    height: 30%;
-    border-right: 1px solid black;
+    margin-left: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center;
+    grid-column: 1;
+    grid-row: 3;
 }
 
 #tamagotchi {
@@ -209,8 +248,13 @@ h2 {
 
 /* Heatmap Styling */
 .con-5{
-    flex-basis: 59%;
-    height: 30%;
+    margin-right: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 3;
 }
 
 #heatmapContainer {
@@ -222,6 +266,7 @@ h2 {
 #heatmapTitle{
     margin: 3%;
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #heatmapContent {
@@ -241,4 +286,6 @@ h2 {
     font-size: 1rem;
     display: flex;
 }
+
+
 

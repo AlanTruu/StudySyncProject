@@ -1,5 +1,5 @@
 <head>
-    <title>Starting structure of the project</title>
+    <title>Study Sync</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,112 +12,125 @@
 
 
 <body>
-
-<!-- Header -->
-<div class="container con-1" id="header">
-    <form action="http://localhost:5000/" method = 'get' id="sign-upButton1">
-        <input type="submit" value="Sign Up" id="sign-upButton2">
-    </form>
-</div>
-<div class="break"></div>
+<div class="dashboard">
+    <!-- Header -->
+    <div class="container con-1" id="header">
+        <img src="images/logo.png" alt="Logo" id="logo">
+        <form action="http://localhost:5000/" method = 'get' id="sign-upButton1">
+            <input type="submit" value="Sign Up" id="sign-upButton2">
+        </form>
+    </div>
 
 <!-- Timer -->
 <div class="container con-2" id="timer">
-    <div class="notice" id="timer-message">Selet a timer before starting</div>
+    <div class="card">
+        <div class="notice" id="timer-message">Selet a timer before starting</div>
+        <div class="container-pomodoro">
+            <div class="pomodoro-timer">
+                <h2 id="timer-head">Pomodoro Timer</h2>
 
-    <div class="container-pomodoro">
-        <div class="pomodoro-timer">
-            <h2>Pomodoro Timer</h2>
+                <div class="button-container">
+                    <button class="button" id="pomodoro-study"><i class="fa-solid fa-hourglass"></i> Study</button>
+                    <button class="button" id="short-break">Short Break</button>
+                    <button class="button" id="long-break">Long Break</button>
+                </div>
 
-            <div class="button-container">
-                <button class="button" id="pomodoro-study"><i class="fa-solid fa-hourglass"></i> Study</button>
-                <button class="button" id="short-break">Short Break</button>
-                <button class="button" id="long-break">Long Break</button>
-            </div>
+                <div class="main-pomodoro">
+                    <div class=p-timer>
+                        <div id="pomodoro-timers" class="timer-display" data-duration="25.00">
+                            <h2 class="time">25:00</h2>
+                        </div>
 
-            <div class="main-pomodoro">
-                <div class=p-timer>
-                    <div id="pomodoro-timers" class="timer-display" data-duration="25.00">
-                        <h2 class="time">25:00</h2>
-                    </div>
+                        <div id="short-timers" class="timer-display" data-duration="5.00">
+                            <h2 class="time">5:00</h2>
+                        </div>
 
-                    <div id="short-timers" class="timer-display" data-duration="5.00">
-                        <h2 class="time">5:00</h2>
-                    </div>
-
-                    <div id="long-timers" class="timer-display" data-duration="10.00">
-                        <h2 class="time">10:00</h2>
+                        <div id="long-timers" class="timer-display" data-duration="10.00">
+                            <h2 class="time">10:00</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="buttons">
-                <button id="start"><i class="fa-sharp fa-solid fa-play"></i></button>
-                <button id="stop"><i class="fa-solid fa-pause"></i></button>
-                <button id="reset"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                <div class="buttons">
+                    <button id="start"><i class="fa-sharp fa-solid fa-play"></i></button>
+                    <button id="stop"><i class="fa-solid fa-pause"></i></button>
+                    <button id="reset"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Calendar -->
-<div class="container con-3" id="calendar"></div>
-<div class="break"></div>
+    <!-- Calendar -->
+    
+        <div class="container con-3" >
+            <div class="card">
+                <div id="calendar"></div>
+            </div>
+        </div>
 
-<!-- Tamagotchi -->
-<div class="container con-4" id="tamagotchi">
-    <img id = 'paperClip'src = 'https://media.istockphoto.com/id/488049995/photo/isolated-paper-clip-with-path.jpg?s=612x612&w=0&k=20&c=Yr4-nTEDs-C3S7iIURU3wyhylDtWND0m2IPSgMsVCRo='>
-    <div id = 'Input'>
-        <input type = 'text', id = 'testingInput', placeholder = 'ask your question'> 
-        <button id = 'inputButton'>GO!</button>
+    <!-- Tamagotchi -->
+    
+    <div class="container con-4" id="tamagotchi">
+        <div class="card">
+            <img id = 'paperClip'src = 'https://media.istockphoto.com/id/488049995/photo/isolated-paper-clip-with-path.jpg?s=612x612&w=0&k=20&c=Yr4-nTEDs-C3S7iIURU3wyhylDtWND0m2IPSgMsVCRo='>
+            <div id = 'Input'>
+                <input type = 'text', id = 'testingInput', placeholder = 'ask your question'> 
+                <button id = 'inputButton'>GO!</button>
+            </div>
+            <div id = 'userInput'>
+
+            </div>
+            <div id = 'output'>
+
+            </div>
+        </div>
     </div>
-    <div id = 'userInput'>
 
-    </div>
-    <div id = 'output'>
-
-    </div>
-</div>
-
-<!-- Heatmap -->
-<div class="container con-5" id="heatmap">
-    <div id="heatmapTitle">Heatmap</div>
-    <div id="heatmapContainer">
-        <div id="heatmapContent">
-            <div class="heatmapItem" id="heatmapItem1"></div>
-            <div class="heatmapItem" id="heatmapItem2"></div>
-            <div class="heatmapItem" id="heatmapItem3"></div>
-            <div class="heatmapItem" id="heatmapItem4"></div>
-            <div class="heatmapItem" id="heatmapItem5"></div>
-            <div class="heatmapItem" id="heatmapItem6"></div>
-            <div class="heatmapItem" id="heatmapItem7"></div>
-            <div class="heatmapItem" id="heatmapItem8"></div>
-            <div class="heatmapItem" id="heatmapItem9"></div>
-            <div class="heatmapItem" id="heatmapItem10"></div>
-            <div class="heatmapItem" id="heatmapItem11"></div>
-            <div class="heatmapItem" id="heatmapItem12"></div>
-            <div class="heatmapItem" id="heatmapItem13"></div>
-            <div class="heatmapItem" id="heatmapItem14"></div>
-            <div class="heatmapItem" id="heatmapItem15"></div>
-            <div class="heatmapItem" id="heatmapItem16"></div>
-            <div class="heatmapItem" id="heatmapItem17"></div>
-            <div class="heatmapItem" id="heatmapItem18"></div>
-            <div class="heatmapItem" id="heatmapItem19"></div>
-            <div class="heatmapItem" id="heatmapItem20"></div>
-            <div class="heatmapItem" id="heatmapItem21"></div>
-            <div class="heatmapItem" id="heatmapItem22"></div>
-            <div class="heatmapItem" id="heatmapItem23"></div>
-            <div class="heatmapItem" id="heatmapItem24"></div>
-            <div class="heatmapItem" id="heatmapItem25"></div>
-            <div class="heatmapItem" id="heatmapItem26"></div>
-            <div class="heatmapItem" id="heatmapItem27"></div>
-            <div class="heatmapItem" id="heatmapItem28"></div>
-            <div class="heatmapItem" id="heatmapItem29"></div>
-            <div class="heatmapItem" id="heatmapItem30"></div>
-            <div class="heatmapItem" id="heatmapItem31"></div>
+    <!-- Heatmap -->
+    
+    <div class="container con-5" id="heatmap">
+        <div class="card">
+            <div id="heatmapTitle">Heatmap</div>
+            <div id="heatmapContainer">
+                <div id="heatmapContent">
+                    <div class="heatmapItem" id="heatmapItem1"></div>
+                    <div class="heatmapItem" id="heatmapItem2"></div>
+                    <div class="heatmapItem" id="heatmapItem3"></div>
+                    <div class="heatmapItem" id="heatmapItem4"></div>
+                    <div class="heatmapItem" id="heatmapItem5"></div>
+                    <div class="heatmapItem" id="heatmapItem6"></div>
+                    <div class="heatmapItem" id="heatmapItem7"></div>
+                    <div class="heatmapItem" id="heatmapItem8"></div>
+                    <div class="heatmapItem" id="heatmapItem9"></div>
+                    <div class="heatmapItem" id="heatmapItem10"></div>
+                    <div class="heatmapItem" id="heatmapItem11"></div>
+                    <div class="heatmapItem" id="heatmapItem12"></div>
+                    <div class="heatmapItem" id="heatmapItem13"></div>
+                    <div class="heatmapItem" id="heatmapItem14"></div>
+                    <div class="heatmapItem" id="heatmapItem15"></div>
+                    <div class="heatmapItem" id="heatmapItem16"></div>
+                    <div class="heatmapItem" id="heatmapItem17"></div>
+                    <div class="heatmapItem" id="heatmapItem18"></div>
+                    <div class="heatmapItem" id="heatmapItem19"></div>
+                    <div class="heatmapItem" id="heatmapItem20"></div>
+                    <div class="heatmapItem" id="heatmapItem21"></div>
+                    <div class="heatmapItem" id="heatmapItem22"></div>
+                    <div class="heatmapItem" id="heatmapItem23"></div>
+                    <div class="heatmapItem" id="heatmapItem24"></div>
+                    <div class="heatmapItem" id="heatmapItem25"></div>
+                    <div class="heatmapItem" id="heatmapItem26"></div>
+                    <div class="heatmapItem" id="heatmapItem27"></div>
+                    <div class="heatmapItem" id="heatmapItem28"></div>
+                    <div class="heatmapItem" id="heatmapItem29"></div>
+                    <div class="heatmapItem" id="heatmapItem30"></div>
+                    <div class="heatmapItem" id="heatmapItem31"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src = 'MainPageFunctions.js'></script>
