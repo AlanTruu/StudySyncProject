@@ -1,104 +1,174 @@
-//button variables
-let start = document.getElementById('start');
-let pause = document.getElementById('pause');
-let reset = document.getElementById('reset');
+//timer on display
+let pomodoroT = document.getElementById("pomodoro-timers");
+let shortBT = document.getElementById("short-timers");
+let longBT = document.getElementById("long-timers");
 
-//start timer variables
-let study_minutes = document.getElementById('s_minutes');
-let study_seconds = document.getElementById('s_seconds');
-console.log(typeof study_seconds.innerText);
+// timer option labels
+let timers = document.querySelectorAll(".timer-display");
+let study = document.getElementById("pomodoro-study");
+let shortBreak = document.getElementById("short-break");
+let longBreak = document.getElementById("long-break");
 
-//break timer variables
-let break_minutes = document.getElementById('b_minutes');
-let break_seconds = document.getElementById('b_seconds');
+// start, stop, pause buttons
+let startBtn = document.getElementById("start");
+let stopBtn = document.getElementById("stop");
+let resetBtn = document.getElementById("reset");
 
-let startCountDown;
+// select timer notice message
+let timerMessage = document.getElementById("timer-message");
 
-//Start Button Event Listener
-start.addEventListener('click', function(){
-    if (startCountDown === undefined){
-        startCountDown = setInterval(decreaseTimer, 1000);
-    }
-    else{
-        alert("Timer is already running");
-    }
-})
+// tImer option labels class
+let button = document.querySelector(".button");
 
-//Pause Button Event Listener
-pause.addEventListener('click', function(){
-    if (startCountDown != undefined){
-        clearInterval(startCountDown);
-        startCountDown = undefined;
-    }
-})
+let currentTimer = null;
+let currentInterval = null;
 
-//Reset Button Event Listener
-reset.addEventListener('click', function(){
-    clearInterval(startCountDown); 
-    startCountDown = undefined;
-    
-    study_minutes.innerText = "25";
-    study_seconds.innerText = "00";
-
-    break_minutes.innerText = "05";
-    break_seconds.innerText = "00";
-})
-
-function decreaseTimer(){
-    let studyMinutes = parseInt(study_minutes.innerText);
-    let studySeconds = parseInt(study_seconds.innerText);
-    let breakMinutes = parseInt(break_minutes.innerText);
-    let breakSeconds = parseInt(break_seconds.innerText);
-    
-    //study timer 
-    if (studySeconds != 0){
-        studySeconds--;
-    }
-    else if (studySeconds == 0 && studyMinutes != 0){
-        studyMinutes--;
-        studySeconds = 59;
-    }
-
-    //break timer
-    if (studySeconds == 0 && studyMinutes == 0) {
-        if (breakSeconds != 0) {
-            breakSeconds -= 1;
-        } else if (breakSeconds == 0 && breakMinutes != 0) {
-            breakMinutes -= 1;
-            breakSeconds = 59;
-        }
-    }
-
-    // Update the display
-    if (studyMinutes < 10){
-        study_minutes.innerText = '0' + studyMinutes;
-    }
-    else{
-        study_minutes.innerText = studyMinutes;
-    }
-    if (studySeconds < 10){
-        study_seconds.innerText = '0' + studySeconds;
-    }
-    else{
-        study_seconds.innerText = studySeconds;
-    }
-    if (breakMinutes < 10){
-        break_minutes.innerText = '0' + breakMinutes;
-    }
-    else{
-        break_minutes.innerText = breakMinutes;
-    }
-    if (breakSeconds < 10){
-        break_seconds.innerText = '0' + breakSeconds;
-    }
-    else{
-        break_seconds.innerText = breakSeconds;
-    }
-
-    //if study and break timer are 0 secs, alert the user "Time up" and stop the timer
-    if (studyMinutes == 0 && studySeconds == 0 && breakMinutes == 0 && breakSeconds == 0) {
-        clearInterval(startCountDown);
-        startCountDown = undefined;
-        alert("Time's up!");
-    }
+// set default timer on display
+function defaultTimer() {
+    pomodoroT.style.display = "block";
+    shortBT.style.display = "none";
+    longBT.style.display = "none";
 }
+
+defaultTimer();
+
+// a function to hide the elements
+function hideElement() {
+    timers.forEach((timer) => {
+        timer.style.display = "none";
+    });
+}
+
+// be able to click the study timer label
+study.addEventListener("click", () => {
+    hideElement();
+    pomodoroT.style.display = "block";
+
+    study.classList.add("active");
+    shortBreak.classList.remove("active");
+    longBreak.classList.remove("active");
+
+    currentTimer = pomodoroT;
+})
+
+shortBreak.addEventListener("click", () => {
+    hideElement();
+    shortBT.style.display = "block";
+
+    study.classList.remove("active");
+    shortBreak.classList.add("active");
+    longBreak.classList.remove("active");
+
+    currentTimer = shortBT;
+})
+
+longBreak.addEventListener("click", () => {
+    hideElement();
+    longBT.style.display = "block";
+
+    study.classList.remove("active");
+    shortBreak.classList.remove("active");
+    longBreak.classList.add("active");
+
+    currentTimer = longBT;
+})
+
+let remainingTime = null;
+let isPaused = false;
+let previousSeconds = null;
+// Start the timer on click
+function startTimer(timeElement) {
+    if (currentInterval){
+        clearInterval(currentInterval);
+    } 
+
+    const duration = parseFloat(timeElement.getAttribute("data-duration")); // minutes
+    const durationMs = duration * 60 * 1000;
+    const endTimestamp = Date.now() + durationMs;
+
+    currentInterval = setInterval(() => {
+        const timeLeft = endTimestamp - Date.now();
+
+        if (timeLeft <= 0) {
+            clearInterval(currentInterval);
+            timeElement.textContent = "00:00";
+            remainingTime = null;
+            previousSeconds = null;
+        } else {
+            remainingTime = timeLeft;
+
+            const minutes = Math.floor(timeLeft / 60000);
+            const seconds = Math.floor((timeLeft % 60000) / 1000);
+
+            if (seconds !== previousSeconds) { 
+                timeElement.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+                previousSeconds = seconds;
+            }
+        }
+    }, 250);
+}
+
+function resumeTimer(timeElement) {
+    if (!remainingTime || remainingTime <= 0){
+        return;
+    }
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
+
+    const endTimestamp = Date.now() + remainingTime;
+
+    currentInterval = setInterval(() => {
+        const timeLeft = endTimestamp - Date.now();
+
+        if (timeLeft <= 0) {
+            clearInterval(currentInterval);
+            timeElement.textContent = "00:00";
+            remainingTime = null;
+            previousSeconds = null;
+        } else {
+            remainingTime = timeLeft;
+
+            const minutes = Math.floor(timeLeft / 60000);
+            const seconds = Math.floor((timeLeft % 60000) / 1000);
+
+            if (seconds !== previousSeconds) {
+                timeElement.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+                previousSeconds = seconds;
+            }
+        }
+    }, 250);
+}
+
+// Button logic
+startBtn.addEventListener("click", () => {
+    if (currentTimer) {
+        if (!remainingTime || remainingTime <= 0) {
+            startTimer(currentTimer);
+        } else {
+            resumeTimer(currentTimer);
+        }
+        timerMessage.style.display = "none";
+    } else {
+        timerMessage.style.display = "block";
+    }
+});
+
+stopBtn.addEventListener("click", () => {
+    if (currentTimer) {
+        clearInterval(currentInterval);
+    } 
+})
+
+resetBtn.addEventListener("click", () => {
+    if (currentInterval) {
+        clearInterval(currentInterval);
+        currentInterval = null;
+    }
+
+    remainingTime = null;
+
+    const timeDisplay = parseFloat(currentTimer.getAttribute("data-duration"));
+    const formatTime = `${timeDisplay}:00`;
+    currentTimer.textContent = formatTime;
+})
