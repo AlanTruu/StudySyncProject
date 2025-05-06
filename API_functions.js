@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import 'dotenv/config'
 const queryWolfram = async (queryInput) => {
     try {
-        const answer = await axios.get('http://api.wolframalpha.com/v1/conversation.jsp?appid=4QTY77-HW6Q8HKV52&i=' + queryInput);
+        const answer = await axios.get(process.env.WOLFRAM_API_KEY + queryInput);
         return answer;
     }
     catch (err) {

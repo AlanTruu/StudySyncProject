@@ -8,6 +8,8 @@ function resetWarning() {
     emailError.style.opacity = 0;
 }
 
+//submit event listener, sends post request to signup route, with user details in body
+//if successful, set the page to received url, otherwise show error message
 form.addEventListener('submit', async (event)=> {
     event.preventDefault();
     await axios.post('http://localhost:5000/signup', {

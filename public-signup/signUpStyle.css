@@ -1,8 +1,9 @@
 html {
     box-sizing: border-box;
     background-color: rgb(4, 55, 242);
+    /* background-color: black; */
     font-family: 'Roboto Mono', serif;
-
+    font-size : 16px;
 }
 
 html, body {
@@ -11,9 +12,13 @@ html, body {
 
 h1 {
     font-weight: 400;
-    
+    margin-left : 40px;
+    margin-top : 40px;
+    font-size : 1.5rem;
 }
 #main-div {
+    display : flex;
+    flex-direction: column;
     width : 90vw;
     position : relative;
     border-radius: 4px;
@@ -41,10 +46,11 @@ h1 {
 #userEmail:focus::placeholder, #user:focus::placeholder, #pass:focus::placeholder {
     color : transparent;
 }
+
 #form-div {
     position : absolute;
-    margin-left: 30px;
-    margin-top : 40px;
+    top : 100px;
+    left : 25px;
 }
 
 #submit-button {
@@ -54,14 +60,21 @@ h1 {
     margin-left : 55px;
     border-radius : 5px;
     width : 150px;
+    border-color: orange;
 }
 
 #EmailError {
     opacity : 0;
     color : red;
+    position : absolute;
+    top : 60px;
+
 }
 
-
+#EmailError {
+    margin-top : 300px;
+    margin-left : 60px;
+}
 @media (min-width : 576px) {
     #main-div {
         width : 20vw;
@@ -72,12 +85,18 @@ h1 {
     }
 
     #form-div {
-        margin-left: 50px;
-        margin-top : 40px;
+        left : 50px;
+        top : 110px;
     }
 
     h1 {
-        margin-left : 40px; 
-        margin-bottom : -5px;
+        margin-top : 40px;
+        margin-left : 40px;
+        font-size : 2rem;
+    }
+
+    #EmailError {
+        top : 70px;
+        left : 20px;
     }
 }
