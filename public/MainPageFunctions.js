@@ -43,66 +43,104 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    console.log("Finalizing calendar layout...");
+    console.log("Rendering full-year calendar with weekday alignment...");
 
     const year = 2025;
-    const month = 2; // March (0-based index)
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const monthName = new Date(year, month, 1).toLocaleString("default", { month: "long" });
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
-    // Store tasks
     const tasks = {};
 
-    // Create title
+    
+    const monthSelector = document.createElement("select");
+    monthSelector.style.marginBottom = "10px";
+    monthNames.forEach((name, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.text = name;
+        monthSelector.appendChild(option);
+    });
+    calendarDiv.appendChild(monthSelector);
+
+    
     const title = document.createElement("h2");
-    title.innerText = `${monthName} ${year}`;
     title.style.textAlign = "center";
-    title.style.fontSize = "20px"; // Slightly smaller
+    title.style.fontSize = "20px";
     title.style.marginBottom = "8px";
     calendarDiv.appendChild(title);
 
-    // Create calendar grid
-    const grid = document.createElement("div");
-    grid.style.display = "grid";
-    grid.style.gridTemplateColumns = "repeat(7, 1fr)"; // 7 equal columns for weekdays
-    grid.style.gap = "4px"; // Slightly reduced gap for compactness
-    grid.style.maxWidth = "500px"; // Shrink width to fit grid
-    grid.style.margin = "0 auto"; // Centers it
+    
+    function renderCalendar(year, month) {
+        const oldGrid = document.getElementById("calendar-grid");
+        if (oldGrid) oldGrid.remove();
 
-    for (let i = 1; i <= daysInMonth; i++) {
-        const date = new Date(year, month, i);
-        const dayName = date.toLocaleString("default", { weekday: "short" }); // e.g., Sun, Mon
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const monthName = monthNames[month];
+        title.innerText = `${monthName} ${year}`;
 
-        const dayDiv = document.createElement("div");
-        dayDiv.style.border = "2px solid black";
-        dayDiv.style.padding = "5px"; // Smaller padding
-        dayDiv.style.textAlign = "center";
-        dayDiv.style.cursor = "pointer";
-        dayDiv.style.minHeight = "60px"; // Compact height
-        dayDiv.style.display = "flex";
-        dayDiv.style.flexDirection = "column";
-        dayDiv.style.justifyContent = "center";
-        dayDiv.style.alignItems = "center";
-        dayDiv.style.fontSize = "12px"; // Smaller font size
-        dayDiv.style.backgroundColor = "#d9d9d9"; // Soft background
-        dayDiv.style.width = "65px"; // Prevent large boxes
+        const grid = document.createElement("div");
+        grid.style.display = "grid";
+        grid.style.gridTemplateColumns = "repeat(7, 1fr)";
+        grid.style.gap = "4px";
+        grid.style.width = "100%";
+        grid.style.maxWidth = "600px";
+        grid.style.margin = "0 auto";
+        grid.id = "calendar-grid";
+        grid.style.boxSizing = "border-box";
+        grid.style.justifyContent = "center";
+        grid.style.alignItems = "center";
 
-        dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}`;
+        
+        const firstDayIndex = new Date(year, month, 1).getDay();
 
-        // Click event to add a task
-        dayDiv.addEventListener("click", function () {
-            const task = prompt(`Enter task for ${dayName}, March ${i}, ${year}:`);
-            if (task) {
-                tasks[i] = task; // Store task
-                dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}<br><small style="font-size: 10px; color: blue;">${task}</small>`;
+        
+        for (let i = 0; i < firstDayIndex; i++) {
+            const emptyDiv = document.createElement("div");
+            emptyDiv.style.visibility = "hidden";
+            grid.appendChild(emptyDiv);
+        }
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const date = new Date(year, month, i);
+            const dayName = date.toLocaleString("default", { weekday: "short" });
+            const key = `${month + 1}-${i}`;
+
+            const dayDiv = document.createElement("div");
+            dayDiv.classList.add("calendar-day");
+
+
+            dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}`;
+            if (tasks[key]) {
+                dayDiv.innerHTML += `<br><small style="font-size: 10px; color: blue;">${tasks[key]}</small>`;
             }
-        });
 
-        grid.appendChild(dayDiv);
+            dayDiv.addEventListener("click", function () {
+                const task = prompt(`Enter task for ${dayName}, ${monthName} ${i}, ${year}:`);
+                if (task) {
+                    tasks[key] = task;
+                    dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}<br><small style="font-size: 10px; color: blue;">${task}</small>`;
+                }
+            });
+
+            grid.appendChild(dayDiv);
+        }
+
+        calendarDiv.appendChild(grid);
     }
 
-    calendarDiv.appendChild(grid);
+    
+    const defaultMonth = 2;
+    monthSelector.value = defaultMonth;
+    renderCalendar(year, defaultMonth);
+
+    monthSelector.addEventListener("change", (e) => {
+        const selectedMonth = parseInt(e.target.value);
+        renderCalendar(year, selectedMonth);
+    });
 });
+
 
 // **** Heatmap ****
 const heatmapGrid = document.getElementById("heatmapGrid");

@@ -219,6 +219,83 @@ h2 {
     grid-row: 2;
 }
 
+#calendar {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    color: #ffffff;
+    font-family: 'Atkinson Hyperlegible Mono', monospace;
+}
+  
+#calendar select {
+    background-color: #0a0a0a;
+    color: #00aaff;
+    border: 2px solid #00aaff;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+  
+#calendar h2 {
+    font-size: 24px;
+    color: #00aaff;
+    margin-bottom: 20px;
+}
+  
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    margin: 0 auto;
+    padding: 10px;
+    justify-content: center;
+    justify-items: center;
+    place-items: center;
+    width: fit-content;
+}
+  
+.calendar-day {
+    background-color: #00aaff;             
+    border: 2px solid #00ccff;             
+    color: #ffffff;
+    border-radius: 20px;                   
+    width: 65px;
+    height: 65px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.6);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+    
+.calendar-day:hover {
+    background-color: #ffde59;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ffde59;
+}
+  
+.calendar-day small {
+    font-size: 10px;
+    margin-top: 3px;
+    color: #005577;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* Tamagotchi Styling */
 .con-4{
     margin-left: 20px;
@@ -270,24 +347,25 @@ h2 {
 .square {
     width: 1fr;
     height: 1fr;
+    border-radius: 10px;
     background: #5486d6;
     border: 3px solid #19458a;
-  }
+}
 
-  .square:hover {
+.square:hover {
     transform: scale(1.05);
     filter: brightness(0.9);
-  }
+}
 
-  .square.active {
+.square.active {
     background: #e0cb7e;
     border: 3px solid #a69147;
-  }
+}
 
-  .square.active:hover {
+.square.active:hover {
     transform: scale(1.05);
     filter: brightness(0.9);
-  }
+}
 
 
 
