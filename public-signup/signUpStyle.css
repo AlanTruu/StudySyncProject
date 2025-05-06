@@ -1,25 +1,54 @@
 html {
-    box-sizing: border-box;
-    background-color: rgb(4, 55, 242);
+    background-color: #275291;
     font-family: 'Roboto Mono', serif;
 
 }
 
+.bottom-left-clip {
+    position: fixed;     /* pin to viewport */
+    bottom: 0;
+    left: 0;
+    /* set to half of your image’s height */
+    height: 200px;       /* e.g. if the image is 200px tall */
+    /* match the image’s width (or let it size naturally) */
+    width: 600px;
+    overflow: hidden;    /* hide anything outside this box */
+    pointer-events: none;/* so it doesn’t intercept clicks, if you want */
+  }
+  
+  .bottom-left-clip img {
+    display: block;      /* remove any inline-gap */
+    /* push the image down so only its top half shows */
+    position: relative;
+    bottom: 0;
+    height: 600x;
+    width: 600px;
+  }
+
 html, body {
+    display: flex;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
+    height: 5vh;
     font-weight: 400;
+    text-align: center;
     
 }
+
 #main-div {
-    width : 90vw;
-    position : relative;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    width: 40vh;
+    height: 50vh;
     border-radius: 4px;
     background-color: white;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.84);
-    height : 100%;
 }
 
 #userEmail, #user, #pass {
@@ -41,19 +70,25 @@ h1 {
 #userEmail:focus::placeholder, #user:focus::placeholder, #pass:focus::placeholder {
     color : transparent;
 }
+
 #form-div {
-    position : absolute;
-    margin-left: 30px;
-    margin-top : 40px;
+    margin: 20px 20px;
+}
+
+#form {
+    margin: 20px 20px;
 }
 
 #submit-button {
+    display: block;
     background-color: orange;
     font-family : inherit;
     margin-top : 10px;
-    margin-left : 55px;
+    margin : 0 auto;
     border-radius : 5px;
     width : 150px;
+    align-self: center;
+    justify-self: center;
 }
 
 #EmailError {
@@ -62,13 +97,9 @@ h1 {
 }
 
 
-@media (min-width : 576px) {
+/* @media (min-width : 576px) {
     #main-div {
-        width : 20vw;
-        height : 50%;
-        margin : 0 auto;
-        margin-top : 200px;
-        margin-left: 700px;
+        margin: 300px 300px;
     }
 
     #form-div {
@@ -80,4 +111,4 @@ h1 {
         margin-left : 40px; 
         margin-bottom : -5px;
     }
-}
+} */
