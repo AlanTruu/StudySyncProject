@@ -296,6 +296,15 @@ h2 {
     text-overflow: ellipsis;
 }
 
+.calendar-day.inactive {
+    background-color: #111;
+    color: #777;
+    opacity: 0.6;
+    box-shadow: none;
+    font-weight: normal;
+    border: 2px solid #333333;
+}
+
 /* Tamagotchi Styling */
 .con-4{
     margin-left: 20px;
@@ -315,8 +324,8 @@ h2 {
     margin-top : 3%;
     margin-left : 3%;
     margin-bottom : 3%;
-    height : 5vh;
-    width : 5vw;
+    height : 10vh;
+    width : 10vw;
 }
 
 #input {

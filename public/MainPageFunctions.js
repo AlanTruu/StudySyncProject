@@ -37,109 +37,113 @@ inputButton.addEventListener('click', sendInput);
 // **** Calendar ****
 document.addEventListener("DOMContentLoaded", function () {
     const calendarDiv = document.getElementById("calendar");
-
+  
     if (!calendarDiv) {
-        console.error("Error: #calendar div not found!");
-        return;
+      console.error("Error: #calendar div not found!");
+      return;
     }
-
-    console.log("Rendering full-year calendar with weekday alignment...");
-
+  
     const year = 2025;
     const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
-
+  
     const tasks = {};
-
-    
+  
     const monthSelector = document.createElement("select");
     monthSelector.style.marginBottom = "10px";
     monthNames.forEach((name, index) => {
-        const option = document.createElement("option");
-        option.value = index;
-        option.text = name;
-        monthSelector.appendChild(option);
+      const option = document.createElement("option");
+      option.value = index;
+      option.text = name;
+      monthSelector.appendChild(option);
     });
     calendarDiv.appendChild(monthSelector);
-
-    
+  
     const title = document.createElement("h2");
     title.style.textAlign = "center";
     title.style.fontSize = "20px";
     title.style.marginBottom = "8px";
     calendarDiv.appendChild(title);
-
-    
+  
     function renderCalendar(year, month) {
-        const oldGrid = document.getElementById("calendar-grid");
-        if (oldGrid) oldGrid.remove();
-
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const monthName = monthNames[month];
-        title.innerText = `${monthName} ${year}`;
-
-        const grid = document.createElement("div");
-        grid.style.display = "grid";
-        grid.style.gridTemplateColumns = "repeat(7, 1fr)";
-        grid.style.gap = "4px";
-        grid.style.width = "100%";
-        grid.style.maxWidth = "600px";
-        grid.style.margin = "0 auto";
-        grid.id = "calendar-grid";
-        grid.style.boxSizing = "border-box";
-        grid.style.justifyContent = "center";
-        grid.style.alignItems = "center";
-
-        
-        const firstDayIndex = new Date(year, month, 1).getDay();
-
-        
-        for (let i = 0; i < firstDayIndex; i++) {
-            const emptyDiv = document.createElement("div");
-            emptyDiv.style.visibility = "hidden";
-            grid.appendChild(emptyDiv);
+      const oldGrid = document.getElementById("calendar-grid");
+      if (oldGrid) oldGrid.remove();
+  
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const monthName = monthNames[month];
+      title.innerText = `${monthName} ${year}`;
+  
+      const grid = document.createElement("div");
+      grid.classList.add("calendar-grid");
+      grid.id = "calendar-grid";
+  
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const lastDatePrevMonth = new Date(year, month, 0).getDate();
+      const totalCells = 42;
+      let dayCount = 0;
+  
+      for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+        const prevDate = new Date(year, month, -(i - 1));
+        const prevDayName = prevDate.toLocaleString("default", { weekday: "short" });
+        const prevDayNum = lastDatePrevMonth - i;
+  
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("calendar-day", "inactive");
+        dayDiv.innerHTML = `<strong>${prevDayName}</strong><br><small>${prevDayNum}</small>`;
+        grid.appendChild(dayDiv);
+        dayCount++;
+      }
+  
+      for (let i = 1; i <= daysInMonth; i++) {
+        const date = new Date(year, month, i);
+        const dayName = date.toLocaleString("default", { weekday: "short" });
+        const key = `${month + 1}-${i}`;
+  
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("calendar-day");
+        dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}`;
+  
+        if (tasks[key]) {
+          dayDiv.innerHTML += `<br><small>${tasks[key]}</small>`;
         }
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            const date = new Date(year, month, i);
-            const dayName = date.toLocaleString("default", { weekday: "short" });
-            const key = `${month + 1}-${i}`;
-
-            const dayDiv = document.createElement("div");
-            dayDiv.classList.add("calendar-day");
-
-
-            dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}`;
-            if (tasks[key]) {
-                dayDiv.innerHTML += `<br><small style="font-size: 10px; color: blue;">${tasks[key]}</small>`;
-            }
-
-            dayDiv.addEventListener("click", function () {
-                const task = prompt(`Enter task for ${dayName}, ${monthName} ${i}, ${year}:`);
-                if (task) {
-                    tasks[key] = task;
-                    dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}<br><small style="font-size: 10px; color: blue;">${task}</small>`;
-                }
-            });
-
-            grid.appendChild(dayDiv);
-        }
-
-        calendarDiv.appendChild(grid);
+  
+        dayDiv.addEventListener("click", function () {
+          const task = prompt(`Enter task for ${dayName}, ${monthName} ${i}, ${year}:`);
+          if (task) {
+            tasks[key] = task;
+            dayDiv.innerHTML = `<strong>${dayName}</strong><br>${i}<br><small>${task}</small>`;
+          }
+        });
+  
+        grid.appendChild(dayDiv);
+        dayCount++;
+      }
+  
+      for (let i = 1; dayCount < totalCells; i++) {
+        const nextDate = new Date(year, month + 1, i);
+        const nextDayName = nextDate.toLocaleString("default", { weekday: "short" });
+  
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("calendar-day", "inactive");
+        dayDiv.innerHTML = `<strong>${nextDayName}</strong><br><small>${i}</small>`;
+        grid.appendChild(dayDiv);
+        dayCount++;
+      }
+  
+      calendarDiv.appendChild(grid);
     }
-
-    
+  
     const defaultMonth = 2;
     monthSelector.value = defaultMonth;
     renderCalendar(year, defaultMonth);
-
+  
     monthSelector.addEventListener("change", (e) => {
-        const selectedMonth = parseInt(e.target.value);
-        renderCalendar(year, selectedMonth);
+      const selectedMonth = parseInt(e.target.value);
+      renderCalendar(year, selectedMonth);
     });
-});
+  });
 
 
 // **** Heatmap ****
