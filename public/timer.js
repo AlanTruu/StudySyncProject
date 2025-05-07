@@ -101,7 +101,7 @@ longBreak.addEventListener("click", () => {
 
 let currentTime = 0;
 let pausedTimer = false;
-let previousSeconds = 0;
+
 /**
  * 
  * @param timeElement: reference to the timer duration in HTML 
@@ -132,7 +132,6 @@ function countDown(timeElement) {
     }
 
     currentTime--;
-    previousSeconds = currentTime;
     updateDisplay(currentTime, timeElement);
 }
 
@@ -181,7 +180,6 @@ resetBtn.addEventListener("click", () => {
         currentInterval = null;
     }
 
-    remainingTime = null;
 
     const timeDisplay = parseFloat(currentTimer.getAttribute("data-duration"));
     const formatTime = `${timeDisplay}:00`;
