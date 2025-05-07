@@ -15,7 +15,7 @@ let stopBtn = document.getElementById("stop");
 let resetBtn = document.getElementById("reset");
 
 // select timer notice message
-let timerMessage = document.getElementById("timer-message");
+let timerMessage = document.getElementById("message");
 
 // tImer option labels class
 let button = document.querySelector(".button");
