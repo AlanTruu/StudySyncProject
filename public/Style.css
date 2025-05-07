@@ -112,17 +112,15 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
     position: relative;
     margin: 2.5rem 0;
     text-align: center;
     border-radius: 50%;
     background: #131e24;
     color: #ffffffde;
-    box-shadow: 
-        20px 20px 42px rgba(14, 16, 33, 0.4), 
-        -20px -20px 42px rgba(28, 34, 68, 0.4);
+    width: 100%;
+    height: 100%;
+    box-shadow: 10px 15px 30px rgba(14, 16, 33, 0.4);
 }
 
 .p-timer::before {
@@ -141,7 +139,7 @@ h2 {
 }
 
 .time {
-    font-size: 5rem !important;
+    font-size: 5rem;
     margin: 10px auto;
 }
 
@@ -152,8 +150,6 @@ h2 {
     border-radius: 5px;
     padding: 10px 20px;
     margin: 0 10px;
-    cursor: pointer;
-    transition: all .2s ease-in;
 }
 
 .button.active, .button:hover {
@@ -184,8 +180,6 @@ h2 {
     border-radius: 5px;
     padding: 10px 20px;
     margin: 0 10px;
-    cursor: pointer;
-    transition: all .2s ease-in;
 }
 
 #start:hover {
@@ -204,10 +198,9 @@ h2 {
     background-color: red;
     display: none;
     padding: 0;
-    font-size: 1rem;
-    text-align: center;
     border-radius: 1rem;
 }
+
 /* Calendar Styling */
 .con-3{
     margin-right: 20px;
