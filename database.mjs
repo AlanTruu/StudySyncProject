@@ -1,11 +1,15 @@
 import bcrypt from "bcryptjs";
 import mysql from 'mysql2/promise';
-import 'dotenv/config';
+import dotenv from 'dotenv'
+import { configDotenv } from "dotenv";
+
+dotenv.config();
+
     const connection = await mysql.createConnection({
-        host : 'sql3.freesqldatabase.com',
-        user : 'sql3777185',
-        password: '7LzBehUBs9',
-        database : 'sql3777185'
+        host : process.env.DB_host,
+        user : process.env.DB_user,
+        password: process.env.DB_password,
+        database : process.env.DB_database
     });
 
     if (connection) {

@@ -100,7 +100,7 @@ h1 {
 }
 
 
-@media (min-width : 576px) {
+/* @media (min-width : 576px) {
     #main-div {
         margin: 300px 300px;
     }
@@ -120,4 +120,4 @@ h1 {
         top : 70px;
         left : 20px;
     }
-}
+} */
