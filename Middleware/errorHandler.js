@@ -1,4 +1,4 @@
-import {EmailError, TokenError} from '../customErrors.js';
+import {EmailError, TokenError, loginError} from '../customErrors.js';
 
 //error handler middleware
 const errorHandler = (error, req, res, next) => {
@@ -11,6 +11,10 @@ const errorHandler = (error, req, res, next) => {
     //if error is related to the authentication token, send back the error message
     if (error instanceof TokenError) {
         return res.status(error.statusCode).send(error.message);
+    }
+
+    if (error instanceof loginError) {
+        return res.status(error.statusCode).json({success : false, msg : error.message})
     }
 
     //if the error was none of the previous, send generic message

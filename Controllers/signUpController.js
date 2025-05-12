@@ -4,7 +4,7 @@
 */
 
 import * as path from 'path';
-import {EmailError} from '../customErrors.js';
+import {EmailError, loginError} from '../customErrors.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { signNewUser, login} from '../database.mjs';
@@ -24,8 +24,8 @@ const jwtSign = (res, email) => {
             throw err;
         }
         
-        res.clearCookie('token', {path : '/main', httpOnly : true})
-        res.cookie('token', token, {path : '/main', httpOnly : true});
+        res.clearCookie('token', { httpOnly : true})
+        res.cookie('token', token, { httpOnly : true});
         return res.json({success : true, url : '/main'});
     });
 }
@@ -64,16 +64,18 @@ const sendLoginPage = (req, res) => {
 const loginUser = async (req, res, next) => {
     const email = req.body.Femail;
     const plainTextPass = req.body.Fpassword;
-    
+
     if (email && plainTextPass) {
         try {
             const loginSuccessful = await login([email, plainTextPass]);
             
             if (loginSuccessful) {
                 jwtSign(res, req.body.Femail);
+                console.log('login successful');
             }
             else {
-                res.send('Login attempt unsuccessful');
+                console.log('else')
+                throw new loginError('Invalid username or password', 401);
             }
         }
         catch (error){

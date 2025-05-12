@@ -12,4 +12,10 @@ class TokenError extends Error {
     }
 }
 
-export {EmailError, TokenError};
+class loginError extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.statusCode = statusCode
+    }
+}
+export {EmailError, TokenError, loginError};

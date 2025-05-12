@@ -26,14 +26,15 @@ app.get('/query', chatRequest);
 //sign up page
 app.use('/' ,express.static('./public-signup'))
 app.get('/', sendSignUpPage);
-app.get('/login', sendLoginPage);
+app.post('/signup', signUp);
 
 //main page that users will see once logged in
 app.use('/main', express.static('./public'));
 app.get('/main', main);
 
 //post requests for signup/login form actions
-app.post('/signup', signUp);
+app.use('/login', express.static('./public-login'))
+app.get('/login', sendLoginPage);
 app.post('/login', loginUser);
 
 app.use(errorHandler);
